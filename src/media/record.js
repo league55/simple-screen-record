@@ -1,14 +1,31 @@
-export const record = (stream, ms) => {
-    const rec = new MediaRecorder(stream), data = [];
-    rec.ondataavailable = e => data.push(e.data);
+export class Recorder {
+    _data;
+    _stream;
 
-    rec.start();
-    console.log(rec.state + " for " + (ms / 1000) + " seconds...");
-    // eslint-disable-next-line
-    const stopped = new Promise((r, e) => (rec.onstop = r, rec.onerror = e));
-    return Promise.all([stopped, wait(ms).then(() => rec.stop())])
-        .then(() => data);
-};
+    constructor(stream) {
+        this._stream = stream;
+    }
 
-export const stop = stream => stream.getTracks().forEach(track => track.stop());
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+    start() {
+        this._rec = new MediaRecorder(this._stream);
+        this._data = [];
+        this._rec.ondataavailable = e => {
+            this._data.push(e.data);
+        }
+        this._rec.start();
+    }
+
+    stop() {
+        const stopped = new Promise((r, e) => (this._rec.onstop = r, this._rec.onerror = e));
+        this._rec.stop();
+        this._stream.getTracks().forEach(track => track.stop());
+        return stopped.then(() => {
+            return URL.createObjectURL(new Blob(this._data));
+        });
+    }
+
+    get data() {
+        return this._data;
+    }
+
+}

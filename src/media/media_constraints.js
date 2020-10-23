@@ -1,16 +1,17 @@
 export const VIDEO_SIZES = {
+    AUTO: {width: 0, height: 0, label: "Auto"},
     SMALL: {width: 600, height: 400, label: "600x400"},
-    MEDIUM: {width: 1280, height: 720, label: "1280x720"},
+    MEDIUM: {width: 1280, height: 720, label: "1280x720"}
 }
 
 export class MediaConstraints {
     constructor() {
-        this.size = VIDEO_SIZES.SMALL;
+        this.size = VIDEO_SIZES.AUTO;
     }
 
     toMediaStreamConstraints() {
         return {
-            video: {
+            video: this._size === VIDEO_SIZES.AUTO ? true : {
                 width: this._size.width,
                 height: this._size.height
             },
