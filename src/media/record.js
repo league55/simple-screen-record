@@ -16,7 +16,10 @@ export class Recorder {
     }
 
     stop() {
-        const stopped = new Promise((r, e) => (this._rec.onstop = r, this._rec.onerror = e));
+        const stopped = new Promise((r, e) => {
+            this._rec.onstop = r;
+            this._rec.onerror = e;
+        });
         this._rec.stop();
         this._stream.getTracks().forEach(track => track.stop());
         return stopped.then(() => {

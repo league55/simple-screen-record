@@ -1,7 +1,7 @@
 import React from 'react';
-import {MediaConstraints, VIDEO_SIZES} from "../../media/media_constraints";
-import Checkbox from "../primitives/Checkbox";
-import RadioBtns from "../primitives/RadioBtns";
+import VideoSize from "./Size";
+import {MediaConstraints} from "../../media/media_constraints";
+import Checkbox from "./Checkbox";
 
 
 class Constraints extends React.Component {
@@ -16,7 +16,7 @@ class Constraints extends React.Component {
 
         return (
             <div>
-                <RadioBtns onChange={(value)=>this.onFieldChange({size: value})} value={constraints.size} values={VIDEO_SIZES} labelField={"label"}/>
+                <VideoSize onSizeChange={(value)=>this.onFieldChange({size: value})} size={constraints.size}/>
                 <Checkbox onChange={(value)=>this.onFieldChange({audio: value})} isChecked={constraints.audio} label={"Grab audio"}/>
                 {constraints.audio && <Checkbox onChange={(value)=>this.onFieldChange({noiseSuppression: value})} isChecked={constraints.noiseSuppression} label={"Noise Suppression"}/>}
                 {constraints.audio && <Checkbox onChange={(value)=>this.onFieldChange({echoCancellation: value})} isChecked={constraints.echoCancellation} label={"Echo Cancellation"}/>}

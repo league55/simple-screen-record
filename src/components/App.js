@@ -24,9 +24,11 @@ class App extends React.Component {
 
     startRecording = async () => {
         const mediaStream = await getMediaStream(this.state.constraints.toMediaStreamConstraints());
-        const recorder = new Recorder(mediaStream);
-        recorder.start();
-        this.setState(Object.assign({}, this.state, {mediaStream, recorder: recorder}));
+        if (mediaStream) {
+            const recorder = new Recorder(mediaStream);
+            recorder.start();
+            this.setState(Object.assign({}, this.state, {mediaStream, recorder: recorder}));
+        }
     }
 
     onConstraintsChange = (constraints) => {
