@@ -4,7 +4,7 @@ import {MediaConstraints} from "../../media/media_constraints";
 import Checkbox from "./Checkbox";
 
 
-class Constraints extends React.Component {
+class Settings extends React.Component {
 
     onFieldChange = (newC) => {
         const merge = Object.assign(new MediaConstraints(), this.props.constraints, newC);
@@ -25,4 +25,4 @@ class Constraints extends React.Component {
     }
 }
 
-export default Constraints;
+export default Settings;

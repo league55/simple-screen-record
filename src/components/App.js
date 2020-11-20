@@ -10,16 +10,32 @@ import {Recorder} from "../media/record";
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {mediaStream: null, constraints: new MediaConstraints(), recorder: null, downloadLink: null};
+        this.state = {mediaStream: null, constraints: new MediaConstraints(), recorder: null, lastRecord: null};
     }
 
 
     stop = () => {
         if (this.state.recorder) {
-            this.state.recorder.stop().then(link => {
-                this.setState(Object.assign({}, this.state, {mediaStream: null, recorder: null, downloadLink: link}));
+            this.state.recorder.stop().then(record => {
+                this.setState(Object.assign({}, this.state, {mediaStream: null, recorder: null, lastRecord: record}));
             });
         }
+    }
+
+    upload = () => {
+        const formData = new FormData();
+        formData.append('file', this.state.lastRecord);
+        fetch(process.env.REACT_APP_RECORD_SERVICE_URL,
+            {
+                method: 'post',
+                body: formData
+            })
+            .then(response => {
+                return response.text();
+            })
+            .then((text) => {
+                console.log(text);
+            });
     }
 
     startRecording = async () => {
@@ -44,8 +60,10 @@ class App extends React.Component {
                     <Constraints onConstraintsChange={this.onConstraintsChange} constraints={this.state.constraints}/>
                     <button onClick={this.startRecording}>Record</button>
                     <button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</button>
-                    {this.state.downloadLink &&
-                    <a id="link" href={this.state.downloadLink} download={"recording.webm"}>Download</a>}
+                    {this.state.lastRecord &&
+                    <a id="link" href={URL.createObjectURL(this.state.lastRecord)} download={"recording.webm"}>Download</a>}
+                    <button onClick={this.upload} disabled={!this.state.lastRecord}>Upload</button>
+
                 </header>
             </div>
         );

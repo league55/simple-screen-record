@@ -23,7 +23,7 @@ export class Recorder {
         this._rec.stop();
         this._stream.getTracks().forEach(track => track.stop());
         return stopped.then(() => {
-            return URL.createObjectURL(new Blob(this._data));
+            return new Blob(this._data, { type: "video/webm" });
         });
     }
 
