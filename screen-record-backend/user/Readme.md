@@ -1,6 +1,6 @@
 #Service for managing users
 
-So far this is not the main goal of a project, so may not be done properly.
+So far this is not the main goal of a project, and may be rather considered to be a mock.
 
 ## Endpoints:
 TODO:
