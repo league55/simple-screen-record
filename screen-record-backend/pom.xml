@@ -11,6 +11,7 @@
     <modules>
         <module>file-manager</module>
         <module>user</module>
+        <module>records-manager</module>
     </modules>
 
 
