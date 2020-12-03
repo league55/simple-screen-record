@@ -22,7 +22,7 @@ class LoginScreen extends React.Component {
     e.preventDefault();
     login(this.state.loginValue)
       .then(value => storageManager.addToStorage(KEYS.LOGIN_TOKEN, value))
-      .then(this.props.onLoginUpdate());
+      .then(this.props.onLoginUpdate);
   }
 
   render() {

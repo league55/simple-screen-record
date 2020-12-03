@@ -10,6 +10,7 @@ export const KEYS = {
 };
 
 function addToStorage(key, value) {
+  value = value.toString();
   window.localStorage.setItem(key, value);
 }
 
