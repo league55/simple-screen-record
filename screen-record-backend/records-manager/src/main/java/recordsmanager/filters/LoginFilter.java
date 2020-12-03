@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.Date;
 
 public class LoginFilter implements Filter {
-
     private final JwtTokensService jwtTokensService;
 
     public LoginFilter(JwtTokensService jwtTokensService) {
@@ -28,21 +27,31 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        if(((HttpServletRequest) request).getMethod().equals("OPTIONS")) {
+        if (((HttpServletRequest) request).getMethod().equals("OPTIONS")) {
+            filterChain.doFilter(request, servletResponse);
+            return;
+        }
+
+        Claims claims;
+        try {
+            claims = jwtTokensService.decodeJwt(req.getHeader(JWT_TOKEN_HEADER));
+        } catch (Exception e) {
+            sendForbidden((HttpServletResponse) servletResponse);
+            return;
+        }
+
+        boolean isValid = isTokenValid(claims);
+        req.getSession().setAttribute("login", claims.getId());
+
+        if (isValid) {
             filterChain.doFilter(request, servletResponse);
         } else {
-            Claims claims = jwtTokensService.decodeJwt(req.getHeader(JWT_TOKEN_HEADER));
-            boolean isValid = isTokenValid(claims);
-
-            req.getSession().setAttribute("login", claims.getId());
-
-            if (isValid) {
-                filterChain.doFilter(request, servletResponse);
-            } else {
-                HttpServletResponse response = (HttpServletResponse) servletResponse;
-                response.sendError(HttpServletResponse.SC_FORBIDDEN);
-            }
+            sendForbidden((HttpServletResponse) servletResponse);
         }
+    }
+
+    private void sendForbidden(HttpServletResponse servletResponse) throws IOException {
+        servletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
     }
 
     private boolean isTokenValid(Claims claims) {
