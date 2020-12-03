@@ -1,8 +1,6 @@
 package recordsmanager.filters;
 
 import io.jsonwebtoken.Claims;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import static recordsmanager.controllers.LoginController.JWT_TOKEN_HEADER;
 import recordsmanager.services.jwt.JwtTokensService;
 import static recordsmanager.services.jwt.JwtTokensServiceImpl.RECORDS_MANAGER;
@@ -30,17 +28,20 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-
-        Claims claims = jwtTokensService.decodeJwt(req.getHeader(JWT_TOKEN_HEADER));
-        boolean isValid = isTokenValid(claims);
-
-        req.getSession().setAttribute("login", claims.getId());
-
-        if (isValid) {
+        if(((HttpServletRequest) request).getMethod().equals("OPTIONS")) {
             filterChain.doFilter(request, servletResponse);
         } else {
-            HttpServletResponse response = (HttpServletResponse) servletResponse;
-            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            Claims claims = jwtTokensService.decodeJwt(req.getHeader(JWT_TOKEN_HEADER));
+            boolean isValid = isTokenValid(claims);
+
+            req.getSession().setAttribute("login", claims.getId());
+
+            if (isValid) {
+                filterChain.doFilter(request, servletResponse);
+            } else {
+                HttpServletResponse response = (HttpServletResponse) servletResponse;
+                response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            }
         }
     }
 

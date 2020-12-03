@@ -21,7 +21,7 @@ public class WebConfig {
         FilterRegistrationBean<LoginFilter> registrationBean = new FilterRegistrationBean<>();
 
         registrationBean.setFilter(new LoginFilter(jwtTokensService));
-        registrationBean.addUrlPatterns("/records/**");
+        registrationBean.addUrlPatterns("/records/*");
 
         return registrationBean;
     }

@@ -5,6 +5,7 @@ import Video from "../../video/Video";
 import Constraints from "../../constraints/Constraints";
 import {MediaConstraints} from "../../../media/media_constraints";
 import {Recorder} from "../../../media/record";
+import {uploadRecord} from "../../../services/api/records_api";
 
 class RecordingScreen extends React.Component {
   constructor(props) {
@@ -24,17 +25,7 @@ class RecordingScreen extends React.Component {
   upload = () => {
     const formData = new FormData();
     formData.append('file', this.state.lastRecord);
-    fetch(process.env.REACT_APP_RECORD_SERVICE_URL,
-      {
-        method: 'post',
-        body: formData
-      })
-      .then(response => {
-        return response.text();
-      })
-      .then((text) => {
-        console.log(text);
-      });
+    uploadRecord(formData).then(() => console.log("upload success"));
   }
 
   startRecording = async () => {

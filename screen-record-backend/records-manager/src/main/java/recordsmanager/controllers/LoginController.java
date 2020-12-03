@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @CrossOrigin(value = "*", origins = "*")
 public class LoginController {
     private final Logger LOG = LoggerFactory.getLogger(LoginController.class);
-    public static final String JWT_TOKEN_HEADER = "JWT_TOKEN";
+    public static final String JWT_TOKEN_HEADER = "jwt_token";
 
     private final LoginService loginService;
 
