@@ -5,5 +5,5 @@ import io.jsonwebtoken.Claims;
 public interface JwtTokensService {
     String createToken(String input, String subject, Long expirationTime);
 
-    Claims decodeJWT(String jwt);
+    Claims decodeJwt(String jwt);
 }

@@ -1,11 +1,9 @@
 package recordsmanager.services.login;
 
-import io.jsonwebtoken.Claims;
+import org.springframework.stereotype.Service;
 import recordsmanager.services.jwt.JwtTokensService;
-import static recordsmanager.services.jwt.JwtTokensServiceImpl.RECORDS_MANAGER;
 
-import java.util.Date;
-
+@Service
 public class LoginServiceImpl implements LoginService {
 
     public static final String LOGIN = "LOGIN";
@@ -21,16 +19,4 @@ public class LoginServiceImpl implements LoginService {
         return tokensService.createToken(username, LOGIN, expiration);
     }
 
-    @Override
-    public boolean testLogin(String username, String token) {
-        Claims decoded = tokensService.decodeJWT(token);
-        long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
-
-        boolean isExpired = decoded.getExpiration().before(now);
-        return !isExpired
-               && username.equals(decoded.getId())
-               && RECORDS_MANAGER.equals(decoded.getIssuer());
-
-    }
 }

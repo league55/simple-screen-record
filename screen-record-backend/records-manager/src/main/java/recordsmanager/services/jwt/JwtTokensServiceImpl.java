@@ -6,17 +6,19 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 
+@Service
 public class JwtTokensServiceImpl implements JwtTokensService {
 
     public static final String RECORDS_MANAGER = "RecordsManager";
 
-    @Value("JWT_TOKEN_SECRET")
+    @Value("#{environment.JWT_TOKEN_SECRET}")
     private String secret;
 
     /**
@@ -35,10 +37,7 @@ public class JwtTokensServiceImpl implements JwtTokensService {
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         //Let's set the JWT Claims
-        JwtBuilder builder = Jwts.builder().setId(id)
-                                 .setIssuedAt(now)
-                                 .setSubject(subject)
-                                 .setIssuer(RECORDS_MANAGER)
+        JwtBuilder builder = Jwts.builder().setId(id).setIssuedAt(now).setSubject(subject).setIssuer(RECORDS_MANAGER)
                                  .signWith(signatureAlgorithm, signingKey);
 
         //if it has been specified, let's add the expiration
@@ -53,11 +52,8 @@ public class JwtTokensServiceImpl implements JwtTokensService {
     }
 
     @Override
-    public Claims decodeJWT(String jwt) {
+    public Claims decodeJwt(String jwt) {
         //This line will throw an exception if it is not a signed JWS (as expected)
-        return Jwts.parserBuilder()
-                   .setSigningKey(DatatypeConverter.parseBase64Binary(secret))
-                   .build()
-                   .parseClaimsJws(jwt).getBody();
+        return Jwts.parserBuilder().setSigningKey(DatatypeConverter.parseBase64Binary(secret)).build().parseClaimsJws(jwt).getBody();
     }
 }

@@ -8,5 +8,4 @@ public interface LoginService {
      */
     String login(String username);
 
-    boolean testLogin(String username, String token);
 }
