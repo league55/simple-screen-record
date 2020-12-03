@@ -1,7 +1,4 @@
-/**
- *
- */
-package records.handlers;
+package filemanager.handlers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -12,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import records.config.S3ClientConfigurationProperties;
-import records.exceptions.DownloadFailedException;
+import filemanager.config.S3ClientConfigurationProperties;
+import filemanager.exceptions.DownloadFailedException;
 import software.amazon.awssdk.core.async.AsyncResponseTransformer;
 import software.amazon.awssdk.core.async.SdkPublisher;
 import software.amazon.awssdk.http.SdkHttpResponse;
@@ -25,10 +22,7 @@ import java.nio.ByteBuffer;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
 
-/**
- * @author Philippe
- *
- */
+
 @RestController
 @RequestMapping("/inbox")
 @Slf4j
@@ -125,7 +119,6 @@ public class DownloadResource {
 
     /**
      * Holds the API response and stream
-     * @author Philippe
      */
     static class FluxResponse {
 

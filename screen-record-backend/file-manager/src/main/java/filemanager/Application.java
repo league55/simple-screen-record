@@ -1,8 +1,8 @@
-package records;
+package filemanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import records.clients.HealthWebClient;
+import filemanager.clients.HealthWebClient;
 
 @SpringBootApplication
 public class Application {

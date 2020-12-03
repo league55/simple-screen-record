@@ -1,4 +1,4 @@
-package records.handlers;
+package filemanager.handlers;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.MediaType;

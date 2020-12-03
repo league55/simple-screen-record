@@ -1,7 +1,7 @@
 /**
  *
  */
-package records.handlers;
+package filemanager.handlers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import records.config.S3ClientConfigurationProperties;
-import records.dto.UploadResult;
-import records.exceptions.UploadFailedException;
+import filemanager.config.S3ClientConfigurationProperties;
+import filemanager.dto.UploadResult;
+import filemanager.exceptions.UploadFailedException;
 import software.amazon.awssdk.core.SdkResponse;
 import software.amazon.awssdk.core.async.AsyncRequestBody;
 import software.amazon.awssdk.services.s3.S3AsyncClient;
@@ -45,10 +45,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-/**
- * @author Philippe
- *
- */
 @RestController
 @RequestMapping("/inbox")
 @Slf4j

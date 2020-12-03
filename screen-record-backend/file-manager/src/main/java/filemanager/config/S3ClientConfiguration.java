@@ -1,4 +1,4 @@
-package records.config;
+package filemanager.config;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

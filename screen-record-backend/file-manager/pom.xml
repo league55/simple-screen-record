@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>records-manager</artifactId>
+    <artifactId>file-manager</artifactId>
     <groupId>org.example</groupId>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>

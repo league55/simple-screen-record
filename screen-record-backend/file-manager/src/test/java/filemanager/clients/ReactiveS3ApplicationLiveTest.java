@@ -1,4 +1,4 @@
-package records.clients;
+package filemanager.clients;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import records.dto.UploadResult;
+import filemanager.dto.UploadResult;
 
 import java.io.File;
 import java.nio.file.Files;

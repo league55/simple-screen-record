@@ -1,4 +1,4 @@
-package records.exceptions;
+package filemanager.exceptions;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,14 +8,14 @@ import software.amazon.awssdk.http.SdkHttpResponse;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class UploadFailedException extends RuntimeException {
+public class DownloadFailedException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     private int statusCode;
     private Optional<String> statusText;
 
-    public UploadFailedException(SdkResponse response) {
+    public DownloadFailedException(SdkResponse response) {
 
         SdkHttpResponse httpResponse = response.sdkHttpResponse();
         if (httpResponse != null) {

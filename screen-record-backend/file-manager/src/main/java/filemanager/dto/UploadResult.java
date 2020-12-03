@@ -1,4 +1,4 @@
-package records.dto;
+package filemanager.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
