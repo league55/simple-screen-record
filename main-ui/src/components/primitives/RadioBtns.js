@@ -8,14 +8,13 @@ class RadioBtns extends React.Component {
     return Object.keys(values).map((key) => {
       const value = values[key];
       let textValue = value[labelField];
-      console.log(textValue);
 
       return <Form.Field
         control={Radio}
         key={textValue + "_radio"}
-        onChange={onChange}
+        onChange={() => onChange(value)}
         value={textValue}
-        checked={currValue === textValue}
+        checked={currValue === value}
         label={textValue}/>
     });
   }

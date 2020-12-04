@@ -10,7 +10,6 @@ class Video extends React.Component {
 
         const lastRec = this.props.record;
         if (lastRec) {
-            debugger;
             this.videoElem.current.srcObject = null;
             this.videoElem.current.src = window.URL.createObjectURL(this.props.record);
             console.log("lastRec", lastRec, this.videoElem.current.src);
