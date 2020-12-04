@@ -3,6 +3,7 @@ import './App.css';
 import storageManager, {KEYS} from "../services/storage/local_storage";
 import LoginScreen from "./pages/login/LoginScreen";
 import RecordingScreen from "./pages/recording/RecordingScreen";
+import {Container} from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -23,11 +24,9 @@ class App extends React.Component {
   render() {
     const isLoggedIn = this.state.loginSuccess;
     return (
-      <div className="App">
-        <header className="App-header">
-          {isLoggedIn ? <RecordingScreen/> : <LoginScreen onLoginUpdate={this.onLoginUpdate}/>}
-        </header>
-      </div>
+      <Container>
+        {isLoggedIn ? <RecordingScreen/> : <LoginScreen onLoginUpdate={this.onLoginUpdate}/>}
+      </Container>
     );
   }
 }
