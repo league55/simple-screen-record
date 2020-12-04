@@ -7,10 +7,18 @@ import {MediaConstraints} from "../../../media/media_constraints";
 import {Recorder} from "../../../media/record";
 import {uploadRecord} from "../../../services/api/records_api";
 
+const WEBM_EXT = ".webm";
+
 class RecordingScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {mediaStream: null, constraints: new MediaConstraints(), recorder: null, lastRecord: null};
+    this.state = {
+      mediaStream: null,
+      constraints: new MediaConstraints(),
+      recorder: null,
+      lastRecord: null,
+      filename: null
+    };
   }
 
 
@@ -23,9 +31,11 @@ class RecordingScreen extends React.Component {
   }
 
   upload = () => {
-    const formData = new FormData();
-    formData.append('file', this.state.lastRecord);
-    uploadRecord(formData).then(() => console.log("upload success"));
+    uploadRecord(new File([this.state.lastRecord], this.state.filename + WEBM_EXT))
+      .then(() => console.log("upload success"))
+      .then(() => {
+        this.setState(Object.assign({}, this.state, {filename: null, lastRecord: null}));
+      });
   }
 
   startRecording = async () => {
@@ -42,6 +52,10 @@ class RecordingScreen extends React.Component {
   }
 
 
+  handleFilenameChange = (e) => {
+    this.setState(Object.assign({}, this.state, {filename: e.target.value}));
+  }
+
   render() {
     return (
       <div className="App">
@@ -51,8 +65,13 @@ class RecordingScreen extends React.Component {
           <button onClick={this.startRecording}>Record</button>
           <button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</button>
           {this.state.lastRecord &&
-          <a id="link" href={URL.createObjectURL(this.state.lastRecord)} download={"recording.webm"}>Download</a>}
-          <button onClick={this.upload} disabled={!this.state.lastRecord}>Upload</button>
+          <div>
+            <input type="text" onChange={this.handleFilenameChange}/>
+            <a id="link" href={URL.createObjectURL(this.state.lastRecord)} disabled={!this.state.filename}
+               download={this.state.filename + WEBM_EXT}>Download</a>
+            <button onClick={this.upload} disabled={!this.state.lastRecord || !this.state.filename}>Upload</button>
+          </div>}
+
 
         </header>
       </div>
