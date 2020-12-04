@@ -1,36 +1,26 @@
 import React from 'react';
+import {Form, Radio} from 'semantic-ui-react'
 
 
 class RadioBtns extends React.Component {
 
-    getSizeRadioButtons(currValue, values, labelField, onChange) {
-        return Object.keys(values).map((key) => {
-            const value = values[key];
-            return <td key={value[labelField] + "_td"}><input
-                key={value[labelField] + "_radio"}
-                type="radio"
-                name={value[labelField]}
-                onChange={() => onChange(value)}
-                value={value}
-                checked={currValue === value}/>{value[labelField]}</td>
-        });
-    }
+  getRadioButtonsGroup(currValue, values, labelField, onChange) {
+    return Object.keys(values).map((key) => {
+      const value = values[key];
+      return <Form.Radio
+          key={value[labelField] + "_radio"}
+          onChange={() => onChange(value)}
+          value={value}
+          checked={currValue === value}
+          label={value[labelField]}/>
+    });
+  }
 
-    render() {
-        const {value, values, labelField, onChange} = this.props;
+  render() {
+    const {value, values, labelField, onChange} = this.props;
 
-        return (
-            <div>
-                <table>
-                    <tbody>
-                    <tr>
-                        {this.getSizeRadioButtons(value, values, labelField, onChange)}
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
+    return this.getRadioButtonsGroup(value, values, labelField, onChange);
+  }
 }
 
 export default RadioBtns;

@@ -6,7 +6,7 @@ import Constraints from "../../constraints/Constraints";
 import {MediaConstraints} from "../../../media/media_constraints";
 import {Recorder} from "../../../media/record";
 import {uploadRecord} from "../../../services/api/records_api";
-import {Grid, Item} from 'semantic-ui-react'
+import {Form, Grid, Item} from 'semantic-ui-react'
 
 const WEBM_EXT = ".webm";
 
@@ -67,17 +67,19 @@ class RecordingScreen extends React.Component {
                 <Video mediaStream={this.state.mediaStream} record={this.state.lastRecord}/>
               </Item>
               <Item>
-                <Constraints onConstraintsChange={this.onConstraintsChange} constraints={this.state.constraints}/>
-                <button onClick={this.startRecording}>Record</button>
-                <button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</button>
-                {this.state.lastRecord &&
-                <div>
-                  <input type="text" onChange={this.handleFilenameChange}/>
-                  <a id="link" href={URL.createObjectURL(this.state.lastRecord)} disabled={!this.state.filename}
-                     download={this.state.filename + WEBM_EXT}>Download</a>
-                  <button onClick={this.upload} disabled={!this.state.lastRecord || !this.state.filename}>Upload
-                  </button>
-                </div>}
+                <Form>
+                  <Constraints onConstraintsChange={this.onConstraintsChange} constraints={this.state.constraints}/>
+                  <button onClick={this.startRecording}>Record</button>
+                  <button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</button>
+                  {this.state.lastRecord &&
+                  <div>
+                    <input type="text" onChange={this.handleFilenameChange}/>
+                    <a id="link" href={URL.createObjectURL(this.state.lastRecord)} disabled={!this.state.filename}
+                       download={this.state.filename + WEBM_EXT}>Download</a>
+                    <button onClick={this.upload} disabled={!this.state.lastRecord || !this.state.filename}>Upload
+                    </button>
+                  </div>}
+                </Form>
               </Item>
             </Item.Group>
           </Grid.Column>
