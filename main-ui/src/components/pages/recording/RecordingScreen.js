@@ -6,7 +6,7 @@ import Constraints from "../../constraints/Constraints";
 import {MediaConstraints} from "../../../media/media_constraints";
 import {Recorder} from "../../../media/record";
 import {uploadRecord} from "../../../services/api/records_api";
-import {Form, Grid, Item} from 'semantic-ui-react'
+import {Form, Grid, Item, Button} from 'semantic-ui-react'
 
 const WEBM_EXT = ".webm";
 
@@ -57,6 +57,14 @@ class RecordingScreen extends React.Component {
     this.setState(Object.assign({}, this.state, {filename: e.target.value}));
   }
 
+  download = (url, name) => {
+    const link = document.createElement('a');
+    link.download = name;
+    link.href = url;
+    link.click();
+  }
+
+
   render() {
     return (
       <Grid divided='vertically'>
@@ -66,20 +74,31 @@ class RecordingScreen extends React.Component {
               <Item>
                 <Video mediaStream={this.state.mediaStream} record={this.state.lastRecord}/>
               </Item>
-              <Item>
-                <Form>
-                  <Constraints onConstraintsChange={this.onConstraintsChange} constraints={this.state.constraints}/>
-                  <button onClick={this.startRecording}>Record</button>
-                  <button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</button>
-                  {this.state.lastRecord &&
-                  <div>
-                    <input type="text" onChange={this.handleFilenameChange}/>
-                    <a id="link" href={URL.createObjectURL(this.state.lastRecord)} disabled={!this.state.filename}
-                       download={this.state.filename + WEBM_EXT}>Download</a>
-                    <button onClick={this.upload} disabled={!this.state.lastRecord || !this.state.filename}>Upload
-                    </button>
-                  </div>}
-                </Form>
+              <Item> <Form>
+
+                <Constraints onConstraintsChange={this.onConstraintsChange} constraints={this.state.constraints}/>
+                <Item>
+                  <Form.Group>
+                    <Form.Button onClick={this.startRecording}>Record</Form.Button>
+                    <Form.Button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</Form.Button>
+                    {this.state.lastRecord &&
+                    <div>
+                      <Form.Input onChange={this.handleFilenameChange} value={this.state.filename} label={"File name"}
+                                  required={true}/>
+                      <Button.Group>
+                        <Form.Button icon='download'
+                                     id="downloadRecord"
+                                     onClick={() => this.download(URL.createObjectURL(this.state.lastRecord), this.state.filename)}
+                                     disabled={!this.state.filename}>Download</Form.Button>
+                        <Button.Or text='or' />
+                        <Form.Button onClick={this.upload} target="_blank"
+                                     disabled={!this.state.lastRecord || !this.state.filename}>Upload
+                        </Form.Button>
+                      </Button.Group>
+                    </div>}
+                  </Form.Group>
+                </Item>
+              </Form>
               </Item>
             </Item.Group>
           </Grid.Column>
