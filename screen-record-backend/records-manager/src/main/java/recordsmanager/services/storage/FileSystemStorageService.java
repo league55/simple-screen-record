@@ -51,7 +51,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public List<String> listAll(String username) {
-        Path path = load(ROOT + username);
+        Path path = load(username);
         File file = path.toFile();
         String[] fileNames = file.list();
 

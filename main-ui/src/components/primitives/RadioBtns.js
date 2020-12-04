@@ -7,12 +7,16 @@ class RadioBtns extends React.Component {
   getRadioButtonsGroup(currValue, values, labelField, onChange) {
     return Object.keys(values).map((key) => {
       const value = values[key];
-      return <Form.Radio
-          key={value[labelField] + "_radio"}
-          onChange={() => onChange(value)}
-          value={value}
-          checked={currValue === value}
-          label={value[labelField]}/>
+      let textValue = value[labelField];
+      console.log(textValue);
+
+      return <Form.Field
+        control={Radio}
+        key={textValue + "_radio"}
+        onChange={onChange}
+        value={textValue}
+        checked={currValue === textValue}
+        label={textValue}/>
     });
   }
 

@@ -33,7 +33,7 @@ public class RecordsController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<String> listUploadedFiles(HttpSession session) {
         String login = getLogin(session);
         return storageService.listAll(login);

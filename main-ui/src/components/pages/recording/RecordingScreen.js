@@ -5,8 +5,9 @@ import Video from "../../video/Video";
 import Constraints from "../../constraints/Constraints";
 import {MediaConstraints} from "../../../media/media_constraints";
 import {Recorder} from "../../../media/record";
-import {uploadRecord} from "../../../services/api/records_api";
+import * as recordApi from "../../../services/api/records_api";
 import {Form, Grid, Item, Button} from 'semantic-ui-react'
+import FileList from "../../filesPanel/FileList";
 
 const WEBM_EXT = ".webm";
 
@@ -17,26 +18,30 @@ class RecordingScreen extends React.Component {
       mediaStream: null,
       constraints: new MediaConstraints(),
       recorder: null,
-      lastRecord: null,
-      filename: null
+      currentRecord: null,
+      filename: null,
+      filenames: null
     };
   }
 
+  componentDidMount() {
+    recordApi.listFiles()
+      .then((filenames) => {
+         this.setState(Object.assign( {}, this.state, {filenames: filenames}));
+      })
+  }
 
   stop = () => {
     if (this.state.recorder) {
       this.state.recorder.stop().then(record => {
-        this.setState(Object.assign({}, this.state, {mediaStream: null, recorder: null, lastRecord: record}));
+        this.setState(Object.assign({}, this.state, {mediaStream: null, recorder: null, currentRecord: record}));
       });
     }
   }
 
   upload = () => {
-    uploadRecord(new File([this.state.lastRecord], this.state.filename + WEBM_EXT))
-      .then(() => console.log("upload success"))
-      .then(() => {
-        // this.setState(Object.assign({}, this.state, {filename: null, lastRecord: null}));
-      });
+    recordApi.uploadRecord(new File([this.state.currentRecord], this.state.filename + WEBM_EXT))
+      .then(() => console.log("upload success"));
   }
 
   startRecording = async () => {
@@ -44,7 +49,7 @@ class RecordingScreen extends React.Component {
     if (mediaStream) {
       const recorder = new Recorder(mediaStream);
       recorder.start();
-      this.setState(Object.assign({}, this.state, {mediaStream, recorder: recorder, lastRecord: null}));
+      this.setState(Object.assign({}, this.state, {mediaStream, recorder: recorder, currentRecord: null}));
     }
   }
 
@@ -72,7 +77,7 @@ class RecordingScreen extends React.Component {
           <Grid.Column width={10}>
             <Item.Group>
               <Item>
-                <Video mediaStream={this.state.mediaStream} record={this.state.lastRecord}/>
+                <Video mediaStream={this.state.mediaStream} record={this.state.currentRecord}/>
               </Item>
               <Item> <Form>
 
@@ -81,18 +86,18 @@ class RecordingScreen extends React.Component {
                   <Form.Group>
                     <Form.Button onClick={this.startRecording}>Record</Form.Button>
                     <Form.Button onClick={this.stop} disabled={!this.state.mediaStream}>Stop</Form.Button>
-                    {this.state.lastRecord &&
+                    {this.state.currentRecord &&
                     <div>
                       <Form.Input onChange={this.handleFilenameChange} value={this.state.filename} label={"File name"}
                                   required={true}/>
                       <Button.Group>
                         <Form.Button icon='download'
                                      id="downloadRecord"
-                                     onClick={() => this.download(URL.createObjectURL(this.state.lastRecord), this.state.filename)}
+                                     onClick={() => this.download(URL.createObjectURL(this.state.currentRecord), this.state.filename)}
                                      disabled={!this.state.filename}>Download</Form.Button>
                         <Button.Or text='or' />
                         <Form.Button onClick={this.upload} target="_blank"
-                                     disabled={!this.state.lastRecord || !this.state.filename}>Upload
+                                     disabled={!this.state.currentRecord || !this.state.filename}>Upload
                         </Form.Button>
                       </Button.Group>
                     </div>}
@@ -102,9 +107,9 @@ class RecordingScreen extends React.Component {
               </Item>
             </Item.Group>
           </Grid.Column>
-          <Grid.Column width={2}>
-            asdf
-          </Grid.Column>
+          {this.state.filenames && <Grid.Column width={2}>
+            <FileList filenames={this.state.filenames}/>
+          </Grid.Column>}
         </Grid.Row>
       </Grid>
     );

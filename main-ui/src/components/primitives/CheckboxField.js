@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Checkbox} from 'semantic-ui-react'
+import {Form} from 'semantic-ui-react'
 
 
 class CheckboxField extends React.Component {
