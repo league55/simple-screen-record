@@ -1,6 +1,7 @@
 package recordsmanager.filters;
 
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import static recordsmanager.controllers.LoginController.JWT_TOKEN_HEADER;
 import recordsmanager.services.jwt.JwtTokensService;
 import static recordsmanager.services.jwt.JwtTokensServiceImpl.RECORDS_MANAGER;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
+@Slf4j
 public class LoginFilter implements Filter {
     private final JwtTokensService jwtTokensService;
 
@@ -42,7 +44,7 @@ public class LoginFilter implements Filter {
 
         boolean isValid = isTokenValid(claims);
         req.getSession().setAttribute("login", claims.getId());
-
+        log.info("Incoming request from {}", claims.getId());
         if (isValid) {
             filterChain.doFilter(request, servletResponse);
         } else {

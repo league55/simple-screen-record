@@ -2,7 +2,9 @@ package recordsmanager.services.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
+import recordsmanager.dto.StoreResult;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class FileSystemStorageService implements StorageService {
 
@@ -26,7 +29,7 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file, String username) throws StorageException {
+    public CompletableFuture<StoreResult> store(MultipartFile file, String username) throws StorageException {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
@@ -47,18 +50,19 @@ public class FileSystemStorageService implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
         }
+        return CompletableFuture.completedFuture(new StoreResult(HttpStatus.CREATED, new ArrayList<>()));
     }
 
     @Override
-    public List<String> listAll(String username) {
+    public CompletableFuture<List<String>> listAll(String username) {
         Path path = load(username);
         File file = path.toFile();
         String[] fileNames = file.list();
 
         if (fileNames != null) {
-            return Arrays.asList(fileNames);
+            return CompletableFuture.completedFuture(Arrays.asList(fileNames));
         } else {
-            return new ArrayList<>();
+            return CompletableFuture.completedFuture(new ArrayList<>());
         }
     }
 

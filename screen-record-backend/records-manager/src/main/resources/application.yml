@@ -1,6 +1,7 @@
 server:
   port: 8090
 
+JWT_TOKEN_SECRET: "How dare you trying to find a secret here? This is not the right place, or is it?"
 
 spring:
   servlet:

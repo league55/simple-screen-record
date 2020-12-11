@@ -1,5 +1,6 @@
 package recordsmanager.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -19,11 +20,16 @@ import recordsmanager.services.storage.StorageFileNotFoundException;
 import recordsmanager.services.storage.StorageService;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @RestController
 @RequestMapping("/records")
 @CrossOrigin(value = "*", origins = "*")
+@Slf4j
 public class RecordsController {
 
     private final Logger LOG = LoggerFactory.getLogger(RecordsController.class);
@@ -34,9 +40,9 @@ public class RecordsController {
     }
 
     @GetMapping
-    public List<String> listUploadedFiles(HttpSession session) {
+    public List<String> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
         String login = getLogin(session);
-        return storageService.listAll(login);
+        return storageService.listAll(login).get();
     }
 
     @GetMapping("/files/{filename:.+}")
@@ -49,11 +55,15 @@ public class RecordsController {
     }
 
     @PostMapping
-    String uploadRecord(@RequestParam("file") MultipartFile file, HttpSession session) throws StorageException {
+    String uploadRecord(@RequestParam("file") MultipartFile file, HttpSession session)
+            throws IOException, ExecutionException, InterruptedException {
         String login = getLogin(session);
-        LOG.info("User {} is uploading something", login);
-        storageService.store(file, login);
-        return "ok";
+        LOG.info("User {} is uploading something filename:{} original:{}", login, file.getName(), file.getOriginalFilename());
+        CompletableFuture<String> result = storageService.store(file, login).thenApply(s -> {
+            LOG.info(s.toString());
+            return s.toString();
+        });
+        return result.get();
     }
 
     private String getLogin(HttpSession session) {

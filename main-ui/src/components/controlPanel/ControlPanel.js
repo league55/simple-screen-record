@@ -20,7 +20,7 @@ class ControlPanel extends React.Component {
   }
 
   upload = () => {
-    recordApi.uploadRecord(new File([this.state.currentRecord], this.state.filename + WEBM_EXT))
+    recordApi.uploadRecord(new File([this.props.currentRecord], this.state.filename + WEBM_EXT))
       .then(() => console.log("upload success"))
       .then(this.props.onNewFileUpload);
   }
