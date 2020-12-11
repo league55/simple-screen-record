@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/records")
@@ -45,7 +46,10 @@ public class RecordsController {
     public List<RecordResponse> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
         String login = getLogin(session);
         return storageService.listAll(login)
-                             .thenApply(files -> service.getUrls(files, login))
+                             .thenApply(files -> files.stream()
+                                                  .map(file -> new RecordResponse(file, service.getUrl(file + "/" + login)))
+                                                  .collect(Collectors
+                                         .toList()))
                              .get();
     }
 

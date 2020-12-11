@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @EnableConfigurationProperties(CloudfrontConfigurationProperties.class)
@@ -28,24 +26,20 @@ public class SignedUrlsServiceImpl implements SignedUrlsService {
         this.configuration = configuration;
     }
 
-    @Override
-    public List<RecordResponse> getUrls(List<String> filenames, String username) {
+    public String getUrl(String filename) {
         String distributionDomain = configuration.getDomain();
         CloudFrontUrlSigner.Protocol protocol = CloudFrontUrlSigner.Protocol.http;
         File privateKeyFile = new File(configuration.getPathToPK());
         Date time = getExpirationDate();
 
-        return filenames.stream().map(file -> {
-            String s3ObjectKey = username + "/" + filenames.get(0);
-            try {
-                String signedUrlCanned = getSignedURLWithCannedPolicy(distributionDomain, s3ObjectKey, protocol, privateKeyFile, time);
-                log.info("Signed url for file {} : {}", file, signedUrlCanned);
-                return new RecordResponse(file, signedUrlCanned);
-            } catch (InvalidKeySpecException | IOException e) {
-                log.error("Failed to create signed url for file: " + file, e);
-            }
-            return new RecordResponse(file, null);
-        }).collect(Collectors.toList());
+        try {
+            String signedUrlCanned = getSignedURLWithCannedPolicy(distributionDomain, filename, protocol, privateKeyFile, time);
+            log.info("Signed url for file {} : {}", filename, signedUrlCanned);
+            return signedUrlCanned;
+        } catch (InvalidKeySpecException | IOException e) {
+            log.error("Failed to create signed url for file: " + filename, e);
+        }
+        return null;
     }
 
     private Date getExpirationDate() {
