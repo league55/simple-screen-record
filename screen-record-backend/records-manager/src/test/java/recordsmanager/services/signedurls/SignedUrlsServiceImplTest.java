@@ -28,7 +28,7 @@ class SignedUrlsServiceImplTest {
         ArrayList<String> files = new ArrayList<>();
         files.add("myfile.webm");
 
-        service.getUrls(files, "asdf");
+//        service.getUrls(files, "asdf");
     }
 
 }

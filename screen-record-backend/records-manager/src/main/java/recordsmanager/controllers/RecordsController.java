@@ -46,11 +46,8 @@ public class RecordsController {
     public List<RecordResponse> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
         String login = getLogin(session);
         return storageService.listAll(login)
-                             .thenApply(files -> files.stream()
-                                                  .map(file -> new RecordResponse(file, service.getUrl(file + "/" + login)))
-                                                  .collect(Collectors
-                                         .toList()))
-                             .get();
+                             .thenApply(files -> files.stream().map(file -> new RecordResponse(file, service.getUrl(login + "/" + file)))
+                                                      .collect(Collectors.toList())).get();
     }
 
     @GetMapping("/files/{filename:.+}")
@@ -58,8 +55,8 @@ public class RecordsController {
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) throws StorageFileNotFoundException {
 
         Resource file = storageService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                             .body(file);
     }
 
     @PostMapping
