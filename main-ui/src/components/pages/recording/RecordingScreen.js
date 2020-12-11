@@ -19,7 +19,8 @@ class RecordingScreen extends React.Component {
       constraints: new MediaConstraints(),
       recorder: null,
       currentRecord: null,
-      filenames: null
+      currentRecordUrl: null,
+      files: null
     };
   }
 
@@ -29,15 +30,15 @@ class RecordingScreen extends React.Component {
 
   loadFileList = () => {
     recordApi.listFiles()
-      .then((filenames) => {
-        this.setState(Object.assign({}, this.state, {filenames: filenames}));
-      })
+      .then((files) => {
+        this.setState(Object.assign({}, this.state, {files: files}));
+      });
   }
 
   stopRecording = () => {
     if (this.state.recorder) {
       this.state.recorder.stop().then(record => {
-        this.setState(Object.assign({}, this.state, {mediaStream: null, recorder: null, currentRecord: record}));
+        this.setState(Object.assign({}, this.state, {mediaStream: null, recorder: null, currentRecord: record, currentRecordUrl: URL.createObjectURL(record)}));
       });
     }
   }
@@ -48,8 +49,19 @@ class RecordingScreen extends React.Component {
     if (mediaStream) {
       const recorder = new Recorder(mediaStream);
       recorder.start();
-      this.setState(Object.assign({}, this.state, {mediaStream, recorder: recorder, currentRecord: null}));
+      this.setState(Object.assign({}, this.state, {mediaStream, recorder: recorder, currentRecord: null, currentRecordUrl: null}));
     }
+  }
+
+  onHitPlay = (file) => {
+    this.setState({
+      mediaStream: null,
+      constraints: new MediaConstraints(),
+      recorder: null,
+      currentRecord: file,
+      currentRecordUrl: file.url,
+      files: this.state.files
+    });
   }
 
   onConstraintsChange = (constraints) => {
@@ -62,7 +74,7 @@ class RecordingScreen extends React.Component {
 
 
   render() {
-    const {mediaStream, currentRecord, constraints, filenames} = this.state;
+    const {mediaStream, currentRecord, currentRecordUrl, constraints, files} = this.state;
 
     return (
       <Grid divided='vertically'>
@@ -70,7 +82,7 @@ class RecordingScreen extends React.Component {
           <Grid.Column width={10}>
             <Item.Group>
               <Item>
-                <Video mediaStream={mediaStream} record={currentRecord}/>
+                <Video mediaStream={mediaStream} record={currentRecord} recordUrl={currentRecordUrl}/>
               </Item>
               <Item>
                 <Form>
@@ -78,16 +90,18 @@ class RecordingScreen extends React.Component {
                   <Item>
                     <ControlPanel isRecording={!!mediaStream}
                                   currentRecord={currentRecord}
+                                  currentRecordUrl={currentRecordUrl}
                                   stopRecording={this.stopRecording}
                                   startRecording={this.startRecording}
-                                  onNewFileUpload={this.onNewFileUpload}/>
+                                  onNewFileUpload={this.onNewFileUpload}
+                    />
                   </Item>
                 </Form>
               </Item>
             </Item.Group>
           </Grid.Column>
-          {filenames && <Grid.Column width={2}>
-            <FileList filenames={filenames}/>
+          {files && <Grid.Column width={5}>
+            <FileList files={files} play={this.onHitPlay}/>
           </Grid.Column>}
         </Grid.Row>
       </Grid>

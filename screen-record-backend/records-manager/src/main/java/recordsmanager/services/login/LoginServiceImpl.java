@@ -15,7 +15,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String login(String username) {
-        long expiration = 1000L * 60L * 60L;
+        long expiration = 1000L * 60L * 60L * 5; //5h
         return tokensService.createToken(username, LOGIN, expiration);
     }
 

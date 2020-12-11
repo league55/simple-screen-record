@@ -11,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class StoreResult {
-    HttpStatus status;
-    String[] keys;
+    private HttpStatus status;
+    private String[] keys;
 
     public StoreResult() {}
 

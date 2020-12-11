@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import recordsmanager.services.storage.StorageException;
+import recordsmanager.dto.RecordResponse;
+import recordsmanager.services.signedurls.SignedUrlsService;
 import recordsmanager.services.storage.StorageFileNotFoundException;
 import recordsmanager.services.storage.StorageService;
 
@@ -24,7 +25,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 @RestController
 @RequestMapping("/records")
@@ -34,15 +34,19 @@ public class RecordsController {
 
     private final Logger LOG = LoggerFactory.getLogger(RecordsController.class);
     private final StorageService storageService;
+    private final SignedUrlsService service;
 
-    public RecordsController(StorageService storageService) {
+    public RecordsController(StorageService storageService, SignedUrlsService service) {
         this.storageService = storageService;
+        this.service = service;
     }
 
     @GetMapping
-    public List<String> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
+    public List<RecordResponse> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
         String login = getLogin(session);
-        return storageService.listAll(login).get();
+        return storageService.listAll(login)
+                             .thenApply(files -> service.getUrls(files, login))
+                             .get();
     }
 
     @GetMapping("/files/{filename:.+}")
