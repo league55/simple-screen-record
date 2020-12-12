@@ -1,7 +1,8 @@
 import {secured} from "./security";
+import {SERVER_URL} from "../../variables/variables";
 
 export async function listFiles() {
-  const response = await fetch("http://localhost:8090/records/",
+  const response = await fetch(SERVER_URL + "/records",
     secured({'method': "GET"}));
 
   const responseData = await response.json();
@@ -15,7 +16,7 @@ export async function uploadRecord(data) {
   formData.append('file', data);
 
 
-  const response = await fetch("http://localhost:8090/records",
+  const response = await fetch(SERVER_URL + "/records",
     secured({
       method: 'post',
       body: formData

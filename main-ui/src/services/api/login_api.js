@@ -1,6 +1,7 @@
+import {SERVER_URL} from "../../variables/variables";
 
 export async function login(loginValue) {
-  const response = await fetch("http://localhost:8090/login/" + loginValue, {
+  const response = await fetch(SERVER_URL + "/login/" + loginValue, {
     method: 'POST'
   })
 

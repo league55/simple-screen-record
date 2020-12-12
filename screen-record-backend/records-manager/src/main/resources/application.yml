@@ -1,10 +1,10 @@
 server:
-  port: 8090
+  port: 8080
 
 JWT_TOKEN_SECRET: "How dare you trying to find a secret here? This is not the right place, or is it?"
 
 spring:
   servlet:
     multipart:
-      max-file-size: 1MB
-      max-request-size: 2MB
+      max-file-size: 5MB
+      max-request-size: 5MB

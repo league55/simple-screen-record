@@ -36,15 +36,18 @@ public class LoginFilter implements Filter {
 
         Claims claims;
         try {
-            claims = jwtTokensService.decodeJwt(req.getHeader(JWT_TOKEN_HEADER));
+            String headerValue = req.getHeader(JWT_TOKEN_HEADER);
+            log.debug("{} header is {}", JWT_TOKEN_HEADER, headerValue);
+            claims = jwtTokensService.decodeJwt(headerValue);
         } catch (Exception e) {
+            log.info("Access forbidden");
             sendForbidden((HttpServletResponse) servletResponse);
             return;
         }
 
         boolean isValid = isTokenValid(claims);
         req.getSession().setAttribute("login", claims.getId());
-        log.info("Incoming request from {}", claims.getId());
+        log.info("Incoming authorized request from {}", claims.getId());
         if (isValid) {
             filterChain.doFilter(request, servletResponse);
         } else {
@@ -61,6 +64,8 @@ public class LoginFilter implements Filter {
         Date now = new Date(nowMillis);
         boolean isExpired = claims.getExpiration().before(now);
 
-        return !isExpired && RECORDS_MANAGER.equals(claims.getIssuer());
+        boolean expired = !isExpired;
+        log.info("Token is expired");
+        return expired && RECORDS_MANAGER.equals(claims.getIssuer());
     }
 }
