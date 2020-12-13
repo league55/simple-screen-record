@@ -67,6 +67,23 @@ jobs:
           name: ui-build 
           path: main-ui/build/   
         
+  deploy:
+    needs: [build-back, build-ui]
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        env:
+          SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+          INSTANCE_URL: ${{ secrets.INSTANCE_URL }}
+        run: |
+          echo -e "$SUPER_SECRET" > records-ec2.pem
+          chmod 400 records-ec2.pem
+          echo -e "test" > test.txt
+          scp -i "records-ec2.pem" test.txt $INSTANCE_URL:src/misc
+          
           
       
          
