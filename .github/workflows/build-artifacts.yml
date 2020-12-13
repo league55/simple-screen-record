@@ -30,10 +30,12 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - run: pwd    
+    - run: ls
     - name: Archive JAR artifacts
       uses: actions/upload-artifact@v2
       with:
-        path: records-manager/target/*.jar   
+        path: screen-record-backend/records-manager/target/*.jar   
       
   build-ui:
     defaults:
@@ -63,7 +65,7 @@ jobs:
       - name: Archive UI artifacts
         uses: actions/upload-artifact@v2
         with:
-          path: build/   
+          path: main-ui/build/   
         
           
       
