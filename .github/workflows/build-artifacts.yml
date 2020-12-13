@@ -75,14 +75,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - shell: bash
-        env:
-          SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+        env: 
           INSTANCE_URL: ${{ secrets.INSTANCE_URL }}
         run: |
-          echo -e "$SUPER_SECRET" > records-ec2.pem
-          chmod 400 records-ec2.pem
-          echo -e "test" > test.txt
-          scp -i "records-ec2.pem" test.txt $INSTANCE_URL:src/misc
+          echo "TODO"
           
           
       
