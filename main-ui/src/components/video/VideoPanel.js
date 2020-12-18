@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Icon, Segment} from "semantic-ui-react";
 import Video from "./Video";
+import isEqual from "react-fast-compare";
 
 
 class VideoPanel extends React.Component {
@@ -30,6 +31,8 @@ class VideoPanel extends React.Component {
 
   render() {
     const {videoSourceProps} = this.props;
+    const {play, pause, stop, muted} = this.state;
+    const noVideo = !Object.values(videoSourceProps).find(v => v !== null);
 
     return (
       <div>
@@ -37,17 +40,17 @@ class VideoPanel extends React.Component {
           <Video videoSourceProps={videoSourceProps} playerProps={Object.assign({}, this.state)}/>
         </Segment>
         <Segment>
-          <Button icon onClick={this.play}>
+          <Button icon onClick={this.play} disabled={noVideo || play}>
             <Icon name='play' color='green'/>
           </Button>
-          <Button icon onClick={this.pause}>
+          <Button icon onClick={this.pause} disabled={noVideo || pause || play}>
             <Icon name='pause' color='grey'/>
           </Button>
-          <Button icon onClick={this.stop}>
+          <Button icon onClick={this.stop} disabled={noVideo || stop}>
             <Icon name='stop' color='grey'/>
           </Button>
           <Button icon onClick={this.toggleMuted}>
-            {this.state.muted ? <Icon name='volume off' color='grey'/> : <Icon name='volume up' color='grey'/>}
+            {muted ? <Icon name='volume off' color='grey'/> : <Icon name='volume up' color='grey'/>}
           </Button>
         </Segment>
       </div>
