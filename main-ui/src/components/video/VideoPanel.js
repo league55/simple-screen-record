@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Segment} from "semantic-ui-react";
+import {Button, Icon, Segment} from "semantic-ui-react";
 import Video from "./Video";
 
 
@@ -8,7 +8,7 @@ class VideoPanel extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {play: false, pause: false, stop: true, mute: false};
+    this.state = {play: false, pause: false, stop: true, muted: false};
   }
 
   play = (e) => {
@@ -23,29 +23,34 @@ class VideoPanel extends React.Component {
     e.preventDefault();
     this.setState(Object.assign({}, this.state, {play: false, pause: false, stop: true}));
   }
-  mute = (e) => {
+  toggleMuted = (e) => {
     e.preventDefault();
-    this.setState(Object.assign({}, this.state, {mute: !this.state.mute}));
+    this.setState(Object.assign({}, this.state, {muted: !this.state.muted}));
   }
 
   render() {
     const {videoSourceProps} = this.props;
 
     return (
-      <Form>
+      <div>
         <Segment placeholder>
-          <Video videoSourceProps={videoSourceProps} playerProps={Object.assign({}, this.state)} />
+          <Video videoSourceProps={videoSourceProps} playerProps={Object.assign({}, this.state)}/>
         </Segment>
         <Segment>
-
-          <Form.Group>
-            <Form.Button onClick={this.play}>Play</Form.Button>
-            <Form.Button onClick={this.pause}>Pause</Form.Button>
-            <Form.Button onClick={this.stop}>Stop</Form.Button>
-            <Form.Button onClick={this.mute}>Mute</Form.Button>
-          </Form.Group>
+          <Button icon onClick={this.play}>
+            <Icon name='play' color='green'/>
+          </Button>
+          <Button icon onClick={this.pause}>
+            <Icon name='pause' color='grey'/>
+          </Button>
+          <Button icon onClick={this.stop}>
+            <Icon name='stop' color='grey'/>
+          </Button>
+          <Button icon onClick={this.toggleMuted}>
+            {this.state.muted ? <Icon name='volume off' color='grey'/> : <Icon name='volume up' color='grey'/>}
+          </Button>
         </Segment>
-      </Form>
+      </div>
     )
       ;
   }

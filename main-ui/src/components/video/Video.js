@@ -28,7 +28,7 @@ class Video extends React.Component {
     }
 
     if (!isEqual(prevProps.playerProps.videoSourceProps, this.props.playerProps)) {
-      const {play, pause, stop, mute} = this.props.playerProps;
+      const {play, pause, stop, muted} = this.props.playerProps;
       if (play) {
         this.videoElem.current.play();
       }
@@ -39,7 +39,7 @@ class Video extends React.Component {
         this.videoElem.current.pause();
         this.videoElem.current.currentTime = 0;
       }
-      this.videoElem.current.muted = mute;
+      this.videoElem.current.muted = muted;
     }
 
 
