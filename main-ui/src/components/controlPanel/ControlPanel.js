@@ -10,13 +10,21 @@ class ControlPanel extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {filename: ""};
+    this.state = {filename: "", uploading: false};
+  }
+
+  uploadingOn = async () => {
+    this.setState(Object.assign({}, this.state, {uploading: true}));
+  }
+  uploadingOff = async () => {
+    this.setState(Object.assign({}, this.state, {uploading: false}));
   }
 
   upload = () => {
-    recordApi.uploadRecord(new File([this.props.currentRecord], this.state.filename + WEBM_EXT))
-      .then(() => console.log("upload success"))
-      .then(this.props.onNewFileUpload);
+    this.uploadingOn().then(() => {
+      return recordApi.uploadRecord(new File([this.props.currentRecord], this.state.filename + WEBM_EXT))
+        .then(this.props.onNewFileUpload);
+    }).finally(this.uploadingOff);
   }
 
 
@@ -42,7 +50,10 @@ class ControlPanel extends React.Component {
                          onClick={() => download(currentRecordUrl, filename)}
                          disabled={!currentRecordUrl || !filename}>Download</Form.Button>
             <Button.Or text='or'/>
-            <Form.Button onClick={this.upload} target="_blank" disabled={!currentRecordUrl || !filename}>Upload
+            <Form.Button onClick={this.upload}
+                         target="_blank"
+                         isabled={!currentRecordUrl || !filename}
+                         loading={this.state.uploading}>Upload
             </Form.Button>
           </Button.Group>
         </div>}

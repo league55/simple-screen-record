@@ -17,7 +17,7 @@ class Constraints extends React.Component {
 
     return (
       <Form>
-        <Form.Group widths='equal' inline>
+        <Form.Group inline>
           <RadioBtns onChange={(value) => this.onFieldChange({size: value})} value={constraints.size}
                      values={VIDEO_SIZES} labelField={"label"}/>
         </Form.Group>
