@@ -1,10 +1,14 @@
+import {MediaConstraints} from "./media_constraints";
 
-export async function getMediaStream(displayMediaOptions) {
+/**
+ * @param {MediaConstraints} recordOptions
+ * */
+export async function getMediaStream(recordOptions) {
     let captureStream = null;
 
     try {
-        captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-        if (displayMediaOptions.grabMic) {
+        captureStream = await navigator.mediaDevices.getDisplayMedia(recordOptions.exportDiaplaMediaConstraints());
+        if (recordOptions.grabMic) {
             const mic = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
             captureStream.addTrack(mic.getAudioTracks()[0]);
         }

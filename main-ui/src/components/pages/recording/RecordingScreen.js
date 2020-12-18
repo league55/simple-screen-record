@@ -45,7 +45,7 @@ class RecordingScreen extends React.Component {
 
 
   startRecording = async () => {
-    const mediaStream = await getMediaStream(this.state.constraints.toMediaStreamConstraints());
+    const mediaStream = await getMediaStream(this.state.constraints);
     if (mediaStream) {
       const recorder = new Recorder(mediaStream);
       recorder.start();

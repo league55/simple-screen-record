@@ -9,7 +9,7 @@ export class MediaConstraints {
         this.size = VIDEO_SIZES.AUTO;
     }
 
-    toMediaStreamConstraints() {
+    exportDiaplaMediaConstraints() {
         return {
             video: this._size === VIDEO_SIZES.AUTO ? true : {
                 width: this._size.width,
