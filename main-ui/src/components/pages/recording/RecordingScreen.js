@@ -5,7 +5,7 @@ import Constraints from "../../constraints/Constraints";
 import {MediaConstraints} from "../../../media/media_constraints";
 import {Recorder} from "../../../media/record";
 import * as recordApi from "../../../services/api/records_api";
-import {Form, Grid, Item, Segment} from 'semantic-ui-react'
+import {Container, Form, Grid, Segment} from 'semantic-ui-react'
 import FileList from "../../filesPanel/FileList";
 import ControlPanel from "../../controlPanel/ControlPanel";
 import VideoPanel from "../../video/VideoPanel";
@@ -87,32 +87,24 @@ class RecordingScreen extends React.Component {
     const {mediaStream, currentRecord, currentRecordUrl, constraints, files} = this.state;
 
     return (
-      <Segment.Group>
+      <Container>
         <Segment>
           <Grid divided='vertically'>
             <Grid.Row columns={2}>
               <Grid.Column width={9}>
-                <Item.Group>
-                  <Item>
-                    <VideoPanel videoSourceProps={{mediaStream, record: currentRecord, recordUrl: currentRecordUrl}}/>
-                  </Item>
-                  <Item>
-                    <Segment>
-                    <Form>
-                      <Constraints onConstraintsChange={this.onConstraintsChange} constraints={constraints}/>
-                      <Item>
-                        <ControlPanel isRecording={!!mediaStream}
-                                      currentRecord={currentRecord}
-                                      currentRecordUrl={currentRecordUrl}
-                                      stopRecording={this.stopRecording}
-                                      startRecording={this.startRecording}
-                                      onNewFileUpload={this.onNewFileUpload}
-                        />
-                      </Item>
-                    </Form>
-                      </Segment>
-                  </Item>
-                </Item.Group>
+                <VideoPanel videoSourceProps={{mediaStream, record: currentRecord, recordUrl: currentRecordUrl}}/>
+                <Segment>
+                  <Form>
+                    <Constraints onConstraintsChange={this.onConstraintsChange} constraints={constraints}/>
+                    <ControlPanel isRecording={!!mediaStream}
+                                  currentRecord={currentRecord}
+                                  currentRecordUrl={currentRecordUrl}
+                                  stopRecording={this.stopRecording}
+                                  startRecording={this.startRecording}
+                                  onNewFileUpload={this.onNewFileUpload}
+                    />
+                  </Form>
+                </Segment>
               </Grid.Column>
               {files && <Grid.Column width={5}>
                 <FileList files={files} play={this.onHitPlay}/>
@@ -120,7 +112,7 @@ class RecordingScreen extends React.Component {
             </Grid.Row>
           </Grid>
         </Segment>
-      </Segment.Group>
+      </Container>
     );
   }
 }

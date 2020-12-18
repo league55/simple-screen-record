@@ -16,8 +16,8 @@ class Constraints extends React.Component {
     const {constraints} = this.props;
 
     return (
-      <Form.Group>
-        <Form.Group inline>
+      <Form>
+        <Form.Group widths='equal' inline>
           <RadioBtns onChange={(value) => this.onFieldChange({size: value})} value={constraints.size}
                      values={VIDEO_SIZES} labelField={"label"}/>
         </Form.Group>
@@ -31,7 +31,7 @@ class Constraints extends React.Component {
           {constraints.audio && <CheckboxField onChange={(value) => this.onFieldChange({echoCancellation: value})}
                                                isChecked={constraints.echoCancellation} label={"Echo Cancellation"}/>}
         </Form.Group>
-      </Form.Group>
+      </Form>
     )
       ;
   }
