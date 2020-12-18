@@ -1,5 +1,3 @@
-import {MediaConstraints} from "./media_constraints";
-
 /**
  * @param {MediaConstraints} recordOptions
  * */

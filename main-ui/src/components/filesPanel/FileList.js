@@ -17,7 +17,7 @@ class FileList extends React.Component {
       </Table.Cell>
         <Table.Cell key={file.name + "_table_cell_button_play"}>
         <Button icon labelPosition='right' key={file.name + "_table_cell_play_button"} onClick={() => this.props.play(file)}>
-          Play
+          Load
             <Icon name='play' color='green' key={file.name + "_table_cell_play_icon"}/>
         </Button>
       </Table.Cell>
