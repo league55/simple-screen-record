@@ -18,7 +18,8 @@ export class MediaConstraints {
             audio: this._audio && {
                 echoCancellation: this._echoCancellation,
                 noiseSuppression: this._noiseSuppression,
-            }
+            },
+            grabMic: this._grabMic
         }
     }
 
@@ -52,5 +53,13 @@ export class MediaConstraints {
 
     set noiseSuppression(noiseSuppression) {
         this._noiseSuppression = noiseSuppression;
+    }
+
+    get grabMic() {
+        return this._grabMic;
+    }
+
+    set grabMic(value) {
+        this._grabMic = value;
     }
 }

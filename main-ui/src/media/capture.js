@@ -4,6 +4,10 @@ export async function getMediaStream(displayMediaOptions) {
 
     try {
         captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+        if (displayMediaOptions.grabMic) {
+            const mic = await navigator.mediaDevices.getUserMedia({video: false, audio: true});
+            captureStream.addTrack(mic.getAudioTracks()[0]);
+        }
     } catch(err) {
         console.error("Error: " + err);
     }

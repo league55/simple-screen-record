@@ -22,6 +22,8 @@ class Constraints extends React.Component {
                      values={VIDEO_SIZES} labelField={"label"}/>
         </Form.Group>
         <Form.Group inline>
+          <CheckboxField onChange={(value) => this.onFieldChange({grabMic: value})} isChecked={constraints.grabMic}
+                         label={"Grab mic"}/>
           <CheckboxField onChange={(value) => this.onFieldChange({audio: value})} isChecked={constraints.audio}
                          label={"Grab audio"}/>
           {constraints.audio && <CheckboxField onChange={(value) => this.onFieldChange({noiseSuppression: value})}
