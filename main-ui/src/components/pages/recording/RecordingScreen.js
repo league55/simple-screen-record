@@ -9,6 +9,7 @@ import {Container, Form, Grid, Segment} from 'semantic-ui-react'
 import FileList from "../../filesPanel/FileList";
 import ControlPanel from "../../controlPanel/ControlPanel";
 import VideoPanel from "../../video/VideoPanel";
+import {wait} from "../../../utils/wait";
 
 
 class RecordingScreen extends React.Component {
@@ -20,7 +21,8 @@ class RecordingScreen extends React.Component {
       recorder: null,
       currentRecord: null,
       currentRecordUrl: null,
-      files: null
+      files: null,
+      countdown: 0
     };
   }
 
@@ -48,18 +50,31 @@ class RecordingScreen extends React.Component {
     }
   }
 
+  countdown = async () => {
+    const SECOND = 1000;
+    return wait(1)
+      .then(() => this.setState(Object.assign({}, this.state, {countdown: 3})))
+      .then(() => wait(SECOND))
+      .then(() => this.setState(Object.assign({}, this.state, {countdown: 2})))
+      .then(() => wait(SECOND))
+      .then(() => this.setState(Object.assign({}, this.state, {countdown: 1})))
+      .then(() => wait(SECOND))
+      .then(() => this.setState(Object.assign({}, this.state, {countdown: 0})));
+  }
 
   startRecording = async () => {
     const mediaStream = await getMediaStream(this.state.constraints);
     if (mediaStream) {
       const recorder = new Recorder(mediaStream);
-      recorder.start();
-      this.setState(Object.assign({}, this.state, {
-        mediaStream,
-        recorder: recorder,
-        currentRecord: null,
-        currentRecordUrl: null
-      }));
+      this.countdown().then(()=> {
+        recorder.start();
+        this.setState(Object.assign({}, this.state, {
+          mediaStream,
+          recorder: recorder,
+          currentRecord: null,
+          currentRecordUrl: null
+        }));
+      })
     }
   }
 
@@ -84,7 +99,14 @@ class RecordingScreen extends React.Component {
 
 
   render() {
-    const {mediaStream, currentRecord, currentRecordUrl, constraints, files} = this.state;
+    const {mediaStream, currentRecord, currentRecordUrl, constraints, files, countdown, recorder} = this.state;
+
+    let videoPlaceHolder;
+    if (countdown > 0) {
+      videoPlaceHolder = countdown;
+    } else if (recorder) {
+      videoPlaceHolder = "Recording";
+    }
 
     return (
       <Container>
@@ -92,7 +114,7 @@ class RecordingScreen extends React.Component {
           <Grid divided='vertically'>
             <Grid.Row columns={2}>
               <Grid.Column width={9}>
-                <VideoPanel videoSourceProps={{mediaStream, record: currentRecord, recordUrl: currentRecordUrl}}/>
+                <VideoPanel videoSourceProps={{mediaStream, record: currentRecord, recordUrl: currentRecordUrl}} placeholder={videoPlaceHolder}/>
                 <Segment>
                   <Form>
                     <Constraints onConstraintsChange={this.onConstraintsChange} constraints={constraints}/>

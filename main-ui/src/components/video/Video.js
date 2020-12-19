@@ -12,6 +12,21 @@ class Video extends React.Component {
     return !isEqual(nextProps, this.props);
   }
 
+  componentDidMount() {
+    // TODO extract
+    const {recordUrl, lastRec, record} = this.props.videoSourceProps;
+
+    this.videoElem.current.srcObject = null;
+    this.videoElem.current.src = "";
+    if (recordUrl) {
+      this.videoElem.current.src = recordUrl;
+    } else if (lastRec) {
+      this.videoElem.current.src = window.URL.createObjectURL(record);
+    } else {
+      this.videoElem.current.srcObject = this.props.mediaStream;
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (!isEqual(prevProps.videoSourceProps, this.props.videoSourceProps)) {
       const {recordUrl, lastRec, record} = this.props.videoSourceProps;
@@ -54,7 +69,6 @@ class Video extends React.Component {
              ref={this.videoElem}
              width={width}
              height={height}
-             autoPlay
              title={"main vid"}/>
     );
   }

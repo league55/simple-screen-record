@@ -52,7 +52,7 @@ class ControlPanel extends React.Component {
             <Button.Or text='or'/>
             <Form.Button onClick={this.upload}
                          target="_blank"
-                         isabled={!currentRecordUrl || !filename}
+                         disabled={!currentRecordUrl || !filename}
                          loading={this.state.uploading}>Upload
             </Form.Button>
           </Button.Group>
