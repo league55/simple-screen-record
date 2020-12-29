@@ -34,8 +34,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: record-manager
-        path: screen-record-backend/records-manager/target/*.jar   
-      
+        path: screen-record-backend/records-manager/target/*.jar
+
   build-ui:
     defaults:
       run:
@@ -56,17 +56,17 @@ jobs:
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-node-
-            ${{ runner.OS }}-      
+            ${{ runner.OS }}-
       - name: Install deps
         run: npm ci
-      - name: Build UI  
+      - name: Build UI
         run: npm run build
       - name: Archive UI artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ui-build 
-          path: main-ui/build/   
-        
+          name: ui-build
+          path: main-ui/build/
+
   deploy:
     needs: [build-back, build-ui]
     defaults:
@@ -74,12 +74,27 @@ jobs:
         shell: bash
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
-        env: 
-          INSTANCE_URL: ${{ secrets.INSTANCE_URL }}
+      - name: Download ui build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ui-build
+      - name: unzip
         run: |
-          echo "TODO"
-          
-          
-      
-         
+          - apt-get install unzip
+          - unzip ui-build.zip -d build
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Cache Node.js module
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-deploy-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-deploy-
+            ${{ runner.OS }}-
+      - name: Install deps
+        run: npm install gh-pages
+      - name: Deploy
+        run: npm run deploy
