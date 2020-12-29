@@ -81,7 +81,8 @@ jobs:
       - name: unzip
         run: |
           sudo apt-get install unzip
-          unzip /home/runner/work/RTC-screen-record/RTC-screen-record/ui-build.zip -d build
+          ls /home/runner/work/RTC-screen-record/RTC-screen-record/
+          unzip /home/runner/work/RTC-screen-record/RTC-screen-record/ui-build -d build
           ls
       - name: Setup Node
         uses: actions/setup-node@v1
