@@ -80,11 +80,7 @@ jobs:
           name: ui-build
       - name: unzip
         run: |
-          mkdir build
-          echo "-----"
-          ls /home/runner/work/RTC-screen-record/RTC-screen-record/*
-          echo "-----"
-          cp -r /home/runner/work/RTC-screen-record/RTC-screen-record/* build
+          pwd
           echo "-----"
           ls
           echo "-----"
