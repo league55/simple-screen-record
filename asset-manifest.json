@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/screen-record/static/css/main.71cf18b7.chunk.css",
+    "main.js": "/screen-record/static/js/main.cf2674dd.chunk.js",
+    "main.js.map": "/screen-record/static/js/main.cf2674dd.chunk.js.map",
+    "runtime-main.js": "/screen-record/static/js/runtime-main.4b712ae6.js",
+    "runtime-main.js.map": "/screen-record/static/js/runtime-main.4b712ae6.js.map",
+    "static/css/2.15e263cd.chunk.css": "/screen-record/static/css/2.15e263cd.chunk.css",
+    "static/js/2.0d1ddc71.chunk.js": "/screen-record/static/js/2.0d1ddc71.chunk.js",
+    "static/js/2.0d1ddc71.chunk.js.map": "/screen-record/static/js/2.0d1ddc71.chunk.js.map",
+    "index.html": "/screen-record/index.html",
+    "precache-manifest.56106a0f6751dd935e701e19b0bbfe4e.js": "/screen-record/precache-manifest.56106a0f6751dd935e701e19b0bbfe4e.js",
+    "service-worker.js": "/screen-record/service-worker.js",
+    "static/css/2.15e263cd.chunk.css.map": "/screen-record/static/css/2.15e263cd.chunk.css.map",
+    "static/css/main.71cf18b7.chunk.css.map": "/screen-record/static/css/main.71cf18b7.chunk.css.map",
+    "static/js/2.0d1ddc71.chunk.js.LICENSE.txt": "/screen-record/static/js/2.0d1ddc71.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/screen-record/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4b712ae6.js",
+    "static/css/2.15e263cd.chunk.css",
+    "static/js/2.0d1ddc71.chunk.js",
+    "static/css/main.71cf18b7.chunk.css",
+    "static/js/main.cf2674dd.chunk.js"
+  ]
+}
