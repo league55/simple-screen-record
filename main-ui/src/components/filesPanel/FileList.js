@@ -24,6 +24,17 @@ class FileList extends React.Component {
     </Table.Row>));
   }
 
+  getPlaceholder() {
+    return [{name: "1"}, {name: "2"}].map(file => (<Table.Row key={file.name + "_table_row"}>
+      <Table.Cell key={file.name + "_table_cell_name"}>
+      </Table.Cell>
+      <Table.Cell key={file.name + "_table_cell_button_download"}>
+      </Table.Cell>
+        <Table.Cell key={file.name + "_table_cell_button_play"}>
+      </Table.Cell>
+    </Table.Row>));
+  }
+
   render() {
     const {files} = this.props;
 
@@ -38,7 +49,7 @@ class FileList extends React.Component {
         </Table.Header>
 
         <Table.Body>
-          {this.getFileRows(files)}
+          {files.length ? this.getFileRows(files) : this.getPlaceholder()}
         </Table.Body>
       </Table>
     )
