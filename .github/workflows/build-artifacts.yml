@@ -83,7 +83,9 @@ jobs:
           pwd
           echo "-----"
           mkdir ../build
-          mv .* ../build
+          echo "-----"
+          mv /home/runner/work/RTC-screen-record/RTC-screen-record/* ../build
+          echo "-----"
           ls ../build
       - name: Setup Node
         uses: actions/setup-node@v1
