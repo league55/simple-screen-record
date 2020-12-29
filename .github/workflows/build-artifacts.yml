@@ -82,9 +82,9 @@ jobs:
         run: |
           pwd
           echo "-----"
-          ls
-          echo "-----"
-          ls build
+          mkdir ../build
+          mv .* ../build
+          ls ../build
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -100,4 +100,7 @@ jobs:
       - name: Install deps
         run: npm install gh-pages
       - name: Deploy
-        run: npm run deploy
+        run: |
+          pwd
+          ls
+          npm run deploy
