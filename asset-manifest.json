@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/screen-record/static/css/main.71cf18b7.chunk.css",
-    "main.js": "/screen-record/static/js/main.def05775.chunk.js",
-    "main.js.map": "/screen-record/static/js/main.def05775.chunk.js.map",
-    "runtime-main.js": "/screen-record/static/js/runtime-main.4b712ae6.js",
-    "runtime-main.js.map": "/screen-record/static/js/runtime-main.4b712ae6.js.map",
-    "static/css/2.15e263cd.chunk.css": "/screen-record/static/css/2.15e263cd.chunk.css",
-    "static/js/2.265f0825.chunk.js": "/screen-record/static/js/2.265f0825.chunk.js",
-    "static/js/2.265f0825.chunk.js.map": "/screen-record/static/js/2.265f0825.chunk.js.map",
-    "index.html": "/screen-record/index.html",
-    "precache-manifest.f9af5b8e5b412443bfaf2ac67299e97e.js": "/screen-record/precache-manifest.f9af5b8e5b412443bfaf2ac67299e97e.js",
-    "service-worker.js": "/screen-record/service-worker.js",
-    "static/css/2.15e263cd.chunk.css.map": "/screen-record/static/css/2.15e263cd.chunk.css.map",
-    "static/css/main.71cf18b7.chunk.css.map": "/screen-record/static/css/main.71cf18b7.chunk.css.map",
-    "static/js/2.265f0825.chunk.js.LICENSE.txt": "/screen-record/static/js/2.265f0825.chunk.js.LICENSE.txt",
-    "static/media/semantic.min.css": "/screen-record/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css",
+    "main.js": "/RTC-screen-record/static/js/main.7882292e.chunk.js",
+    "main.js.map": "/RTC-screen-record/static/js/main.7882292e.chunk.js.map",
+    "runtime-main.js": "/RTC-screen-record/static/js/runtime-main.f574b1da.js",
+    "runtime-main.js.map": "/RTC-screen-record/static/js/runtime-main.f574b1da.js.map",
+    "static/css/2.77dbdb26.chunk.css": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css",
+    "static/js/2.0fb79c7f.chunk.js": "/RTC-screen-record/static/js/2.0fb79c7f.chunk.js",
+    "static/js/2.0fb79c7f.chunk.js.map": "/RTC-screen-record/static/js/2.0fb79c7f.chunk.js.map",
+    "index.html": "/RTC-screen-record/index.html",
+    "precache-manifest.de39c00b2ea118ad87d30156fa0bb791.js": "/RTC-screen-record/precache-manifest.de39c00b2ea118ad87d30156fa0bb791.js",
+    "service-worker.js": "/RTC-screen-record/service-worker.js",
+    "static/css/2.77dbdb26.chunk.css.map": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css.map",
+    "static/css/main.71cf18b7.chunk.css.map": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css.map",
+    "static/js/2.0fb79c7f.chunk.js.LICENSE.txt": "/RTC-screen-record/static/js/2.0fb79c7f.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/RTC-screen-record/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.4b712ae6.js",
-    "static/css/2.15e263cd.chunk.css",
-    "static/js/2.265f0825.chunk.js",
+    "static/js/runtime-main.f574b1da.js",
+    "static/css/2.77dbdb26.chunk.css",
+    "static/js/2.0fb79c7f.chunk.js",
     "static/css/main.71cf18b7.chunk.css",
-    "static/js/main.def05775.chunk.js"
+    "static/js/main.7882292e.chunk.js"
   ]
 }
