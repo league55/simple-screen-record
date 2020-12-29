@@ -80,8 +80,8 @@ jobs:
           name: ui-build
       - name: unzip
         run: |
-          - apt-get install unzip
-          - unzip ui-build.zip -d build
+          apt-get install unzip
+          unzip ui-build.zip -d build
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
