@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7fa7779cb68e3a5e42b022a2755ae14a",
+    "revision": "606ff4b993776b7ea68b1d9d436ec58f",
     "url": "/screen-record/index.html"
   },
   {
-    "revision": "64a75a9ff156205c0255",
+    "revision": "1d1d423abe34681e1efd",
     "url": "/screen-record/static/css/2.15e263cd.chunk.css"
   },
   {
-    "revision": "1acb31df4dfe6e5dad28",
+    "revision": "4c668a4142c63f22587c",
     "url": "/screen-record/static/css/main.71cf18b7.chunk.css"
   },
   {
-    "revision": "64a75a9ff156205c0255",
-    "url": "/screen-record/static/js/2.0d1ddc71.chunk.js"
+    "revision": "1d1d423abe34681e1efd",
+    "url": "/screen-record/static/js/2.265f0825.chunk.js"
   },
   {
     "revision": "1a1a42c150bd05496b97b265c552c789",
-    "url": "/screen-record/static/js/2.0d1ddc71.chunk.js.LICENSE.txt"
+    "url": "/screen-record/static/js/2.265f0825.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1acb31df4dfe6e5dad28",
-    "url": "/screen-record/static/js/main.cf2674dd.chunk.js"
+    "revision": "4c668a4142c63f22587c",
+    "url": "/screen-record/static/js/main.def05775.chunk.js"
   },
   {
     "revision": "4e25a4d5e2d868a382c4",
