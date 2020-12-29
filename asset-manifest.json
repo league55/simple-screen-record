@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css",
-    "main.js": "/RTC-screen-record/static/js/main.7882292e.chunk.js",
-    "main.js.map": "/RTC-screen-record/static/js/main.7882292e.chunk.js.map",
+    "main.js": "/RTC-screen-record/static/js/main.51860407.chunk.js",
+    "main.js.map": "/RTC-screen-record/static/js/main.51860407.chunk.js.map",
     "runtime-main.js": "/RTC-screen-record/static/js/runtime-main.f574b1da.js",
     "runtime-main.js.map": "/RTC-screen-record/static/js/runtime-main.f574b1da.js.map",
     "static/css/2.77dbdb26.chunk.css": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css",
     "static/js/2.0fb79c7f.chunk.js": "/RTC-screen-record/static/js/2.0fb79c7f.chunk.js",
     "static/js/2.0fb79c7f.chunk.js.map": "/RTC-screen-record/static/js/2.0fb79c7f.chunk.js.map",
     "index.html": "/RTC-screen-record/index.html",
-    "precache-manifest.de39c00b2ea118ad87d30156fa0bb791.js": "/RTC-screen-record/precache-manifest.de39c00b2ea118ad87d30156fa0bb791.js",
+    "precache-manifest.6171a8ab262dc48477b1fb6d7d89e2e2.js": "/RTC-screen-record/precache-manifest.6171a8ab262dc48477b1fb6d7d89e2e2.js",
     "service-worker.js": "/RTC-screen-record/service-worker.js",
     "static/css/2.77dbdb26.chunk.css.map": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css.map",
     "static/css/main.71cf18b7.chunk.css.map": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.77dbdb26.chunk.css",
     "static/js/2.0fb79c7f.chunk.js",
     "static/css/main.71cf18b7.chunk.css",
-    "static/js/main.7882292e.chunk.js"
+    "static/js/main.51860407.chunk.js"
   ]
 }

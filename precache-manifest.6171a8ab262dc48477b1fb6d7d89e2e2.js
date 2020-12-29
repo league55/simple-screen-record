@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c8554fcc76d918df9d1ee7a484848898",
+    "revision": "5fe070e4f7cc319468ea200a3375d6e9",
     "url": "/RTC-screen-record/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css"
   },
   {
-    "revision": "76d6dd976c3232c0544c",
+    "revision": "aef346838e24ee4acd01",
     "url": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/RTC-screen-record/static/js/2.0fb79c7f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "76d6dd976c3232c0544c",
-    "url": "/RTC-screen-record/static/js/main.7882292e.chunk.js"
+    "revision": "aef346838e24ee4acd01",
+    "url": "/RTC-screen-record/static/js/main.51860407.chunk.js"
   },
   {
     "revision": "5dc2c613152adc9b384b",
