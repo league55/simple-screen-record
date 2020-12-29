@@ -10,6 +10,7 @@ import FileList from "../../filesPanel/FileList";
 import ControlPanel from "../../controlPanel/ControlPanel";
 import VideoPanel from "../../video/VideoPanel";
 import {wait} from "../../../utils/wait";
+import {UI_ONLY} from "../../../variables/variables";
 
 
 class RecordingScreen extends React.Component {
@@ -21,13 +22,13 @@ class RecordingScreen extends React.Component {
       recorder: null,
       currentRecord: null,
       currentRecordUrl: null,
-      files: null,
+      files: [],
       countdown: 0
     };
   }
 
   componentDidMount() {
-    this.loadFileList();
+    if(!UI_ONLY) this.loadFileList();
   }
 
   loadFileList = () => {
@@ -40,11 +41,14 @@ class RecordingScreen extends React.Component {
   stopRecording = () => {
     if (this.state.recorder) {
       this.state.recorder.stop().then(record => {
+        const currentRecordUrl = URL.createObjectURL(record);
+        const filesCopy = this.state.files.concat({name: "video" + this.state.files.length, url: currentRecordUrl});
         this.setState(Object.assign({}, this.state, {
           mediaStream: null,
           recorder: null,
           currentRecord: record,
-          currentRecordUrl: URL.createObjectURL(record)
+          currentRecordUrl: currentRecordUrl,
+          files: filesCopy
         }));
       });
     }
@@ -128,7 +132,7 @@ class RecordingScreen extends React.Component {
                   </Form>
                 </Segment>
               </Grid.Column>
-              {files && <Grid.Column width={5}>
+              {<Grid.Column width={5}>
                 <FileList files={files} play={this.onHitPlay}/>
               </Grid.Column>}
             </Grid.Row>

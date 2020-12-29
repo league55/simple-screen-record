@@ -4,6 +4,7 @@ import storageManager, {KEYS} from "../services/storage/local_storage";
 import LoginScreen from "./pages/login/LoginScreen";
 import RecordingScreen from "./pages/recording/RecordingScreen";
 import {Container} from 'semantic-ui-react'
+import {UI_ONLY} from "../variables/variables";
 
 
 class App extends React.Component {
@@ -25,7 +26,7 @@ class App extends React.Component {
     const isLoggedIn = this.state.loginSuccess;
     return (
       <Container>
-        {isLoggedIn ? <RecordingScreen/> : <LoginScreen onLoginUpdate={this.onLoginUpdate}/>}
+        {isLoggedIn || UI_ONLY ? <RecordingScreen/> : <LoginScreen onLoginUpdate={this.onLoginUpdate}/>}
       </Container>
     );
   }
