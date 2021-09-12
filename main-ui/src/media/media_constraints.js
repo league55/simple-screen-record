@@ -1,7 +1,8 @@
 export const VIDEO_SIZES = {
     AUTO: {width: 0, height: 0, label: "Auto"},
-    SMALL: {width: 600, height: 400, label: "600x400"},
-    MEDIUM: {width: 1280, height: 720, label: "1280x720"}
+    SMALL: {width: 640, height: 480, label: "640x480"},
+    MEDIUM: {width: 1280, height: 720, label: "1280x720"},
+    CUSTOM: {width: 0, height: 0, label: "Custom"}
 }
 
 export class MediaConstraints {
@@ -29,6 +30,14 @@ export class MediaConstraints {
 
     set size(newSize) {
         this._size = newSize;
+    }
+
+    set height(height) {
+        this._size.height = height;
+    }
+
+    set width(width) {
+        this._size.width = width;
     }
 
     get audio() {

@@ -12,6 +12,21 @@ class Constraints extends React.Component {
     this.props.onConstraintsChange(Object.assign({}, {constraints: merge}));
   }
 
+  getCustomSizeInputs(constraints) {
+    return <Form.Group inline>
+      <Form.Input onChange={(e) => this.onFieldChange({width: +e.target.value})}
+                  value={constraints.size.width}
+                  type="number"
+                  label={"Width"}
+                  required={true}/>
+      <Form.Input onChange={(e) => this.onFieldChange({height: +e.target.value})}
+                  value={constraints.size.height}
+                  type="number"
+                  label={"Height"}
+                  required={true}/>
+    </Form.Group>;
+  }
+
   render() {
     const {constraints} = this.props;
 
@@ -20,6 +35,7 @@ class Constraints extends React.Component {
         <Form.Group inline>
           <RadioBtns onChange={(value) => this.onFieldChange({size: value})} value={constraints.size}
                      values={VIDEO_SIZES} labelField={"label"}/>
+          {constraints.size === VIDEO_SIZES.CUSTOM && this.getCustomSizeInputs(constraints)}
         </Form.Group>
         <Form.Group inline>
           <CheckboxField onChange={(value) => this.onFieldChange({grabMic: value})} isChecked={constraints.grabMic}
@@ -35,6 +51,7 @@ class Constraints extends React.Component {
     )
       ;
   }
+
 }
 
 export default Constraints;
