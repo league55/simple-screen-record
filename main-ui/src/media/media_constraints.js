@@ -17,6 +17,8 @@ export class MediaConstraints {
                 height: this._size.height
             },
             audio: this._audio && {
+                channels: 2,
+                autoGainControl: false,
                 echoCancellation: this._echoCancellation,
                 noiseSuppression: this._noiseSuppression,
             },

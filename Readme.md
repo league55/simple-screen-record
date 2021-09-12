@@ -23,6 +23,10 @@ After receiving first bills from AWS for using Elastic IP address I shut down mo
 and adjusted UI code - added feature switcher so that UI could run it's core feature - screen record, without possibility to upload files to cloud.    
 Currently, it is hosted on `GitHub` Pages and deployed from `GitHub Actions` pipeline.
 
+### Limitations
+* `Webm` videos scroll is glitching in many video players. AFAIK, it is the limitation of the format. After converting to something like `mp4` it starts working.
+* Audio recording is platform / browser dependent. Chrome on Windows records sound fine, while Chrome on OSX can only record sound of a browser tab. More info here.  
+* Echo Cancellation and Noise Suppression are also implemented by browser and may not work or even downgrade audio quality sometimes. 
 
 ### Tech:
 Using technologies that I am already familiar with:
