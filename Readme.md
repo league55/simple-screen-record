@@ -1,4 +1,4 @@
-#Simple Screen Recorder
+# Simple Screen Recorder
 ## About
 A training project, key goals:
 * Research AWS services
