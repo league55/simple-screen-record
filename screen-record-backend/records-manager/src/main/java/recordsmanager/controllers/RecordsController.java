@@ -43,10 +43,11 @@ public class RecordsController {
     }
 
     @GetMapping
-    public List<RecordResponse> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
+        public List<RecordResponse> listUploadedFiles(HttpSession session) throws ExecutionException, InterruptedException {
         String login = getLogin(session);
         return storageService.listAll(login)
-                             .thenApply(files -> files.stream().map(file -> new RecordResponse(file, service.getUrl(login + "/" + file)))
+                             .thenApply(files -> files.stream()
+                                                      .map(file -> new RecordResponse(file, service.getUrl(login + "/" + file)))
                                                       .collect(Collectors.toList())).get();
     }
 

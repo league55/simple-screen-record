@@ -20,8 +20,8 @@ import recordsmanager.services.login.LoginService;
 @ActiveProfiles("test")
 class LoginControllerTest {
 
-    private final String USERNAME = "username";
-    private final String TOKEN = "token";
+    private static final String USERNAME = "username";
+    private static final String TOKEN = "token";
     @Autowired
     private LoginController controller;
 
