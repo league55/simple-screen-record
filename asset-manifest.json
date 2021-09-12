@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css",
-    "main.js": "/RTC-screen-record/static/js/main.762175fc.chunk.js",
-    "main.js.map": "/RTC-screen-record/static/js/main.762175fc.chunk.js.map",
-    "runtime-main.js": "/RTC-screen-record/static/js/runtime-main.f574b1da.js",
-    "runtime-main.js.map": "/RTC-screen-record/static/js/runtime-main.f574b1da.js.map",
-    "static/css/2.77dbdb26.chunk.css": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css",
-    "static/js/2.480a1baa.chunk.js": "/RTC-screen-record/static/js/2.480a1baa.chunk.js",
-    "static/js/2.480a1baa.chunk.js.map": "/RTC-screen-record/static/js/2.480a1baa.chunk.js.map",
-    "index.html": "/RTC-screen-record/index.html",
-    "precache-manifest.5e904382f708d5637718ca95a94edc3e.js": "/RTC-screen-record/precache-manifest.5e904382f708d5637718ca95a94edc3e.js",
-    "service-worker.js": "/RTC-screen-record/service-worker.js",
-    "static/css/2.77dbdb26.chunk.css.map": "/RTC-screen-record/static/css/2.77dbdb26.chunk.css.map",
-    "static/css/main.71cf18b7.chunk.css.map": "/RTC-screen-record/static/css/main.71cf18b7.chunk.css.map",
-    "static/js/2.480a1baa.chunk.js.LICENSE.txt": "/RTC-screen-record/static/js/2.480a1baa.chunk.js.LICENSE.txt",
-    "static/media/semantic.min.css": "/RTC-screen-record/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/simple-screen-record/static/css/main.71cf18b7.chunk.css",
+    "main.js": "/simple-screen-record/static/js/main.2778698f.chunk.js",
+    "main.js.map": "/simple-screen-record/static/js/main.2778698f.chunk.js.map",
+    "runtime-main.js": "/simple-screen-record/static/js/runtime-main.fac5e057.js",
+    "runtime-main.js.map": "/simple-screen-record/static/js/runtime-main.fac5e057.js.map",
+    "static/css/2.08dadcab.chunk.css": "/simple-screen-record/static/css/2.08dadcab.chunk.css",
+    "static/js/2.d8452b93.chunk.js": "/simple-screen-record/static/js/2.d8452b93.chunk.js",
+    "static/js/2.d8452b93.chunk.js.map": "/simple-screen-record/static/js/2.d8452b93.chunk.js.map",
+    "index.html": "/simple-screen-record/index.html",
+    "precache-manifest.6037e23cf5f37c89e8d0fb6fad78665f.js": "/simple-screen-record/precache-manifest.6037e23cf5f37c89e8d0fb6fad78665f.js",
+    "service-worker.js": "/simple-screen-record/service-worker.js",
+    "static/css/2.08dadcab.chunk.css.map": "/simple-screen-record/static/css/2.08dadcab.chunk.css.map",
+    "static/css/main.71cf18b7.chunk.css.map": "/simple-screen-record/static/css/main.71cf18b7.chunk.css.map",
+    "static/js/2.d8452b93.chunk.js.LICENSE.txt": "/simple-screen-record/static/js/2.d8452b93.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/simple-screen-record/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.f574b1da.js",
-    "static/css/2.77dbdb26.chunk.css",
-    "static/js/2.480a1baa.chunk.js",
+    "static/js/runtime-main.fac5e057.js",
+    "static/css/2.08dadcab.chunk.css",
+    "static/js/2.d8452b93.chunk.js",
     "static/css/main.71cf18b7.chunk.css",
-    "static/js/main.762175fc.chunk.js"
+    "static/js/main.2778698f.chunk.js"
   ]
 }
