@@ -5,6 +5,7 @@ import LoginScreen from "./pages/login/LoginScreen";
 import RecordingScreen from "./pages/recording/RecordingScreen";
 import {Container} from 'semantic-ui-react'
 import {UI_ONLY} from "../variables/variables";
+import GithubCorner from 'react-github-corner';
 
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
     const isLoggedIn = this.state.loginSuccess;
     return (
       <Container>
+        <GithubCorner href="https://github.com/league55/RTC-screen-record" bannerColor="#70B7FD"/>
         {isLoggedIn || UI_ONLY ? <RecordingScreen/> : <LoginScreen onLoginUpdate={this.onLoginUpdate}/>}
       </Container>
     );
