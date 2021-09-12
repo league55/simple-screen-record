@@ -50,8 +50,8 @@ And partially new ones:
 * Only proxy files on upload, use AWS `CloudFront` for download
 * `CloudFront` is also a CDN that overall should deliver content faster than just S3.
 * Cache some data loaded from AWS:
-    * List of files
-    * Signed urls
+* List of files
+* Signed urls
 
 ## Deployment
 At one point I deployed and tested whole thing on an AWS EC2 instance, architecture was next: 
