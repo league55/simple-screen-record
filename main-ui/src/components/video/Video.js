@@ -62,13 +62,10 @@ class Video extends React.Component {
   }
 
   render() {
-    const {width = 550, height = 400} = this.props;
     return (
       <video id="video"
              loop
              ref={this.videoElem}
-             width={width}
-             height={height}
              title={"main vid"}/>
     );
   }

@@ -11,7 +11,7 @@ class ControlPanel extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {filename: "", uploading: false};
+    this.state = {filename: "my_recording_1", uploading: false};
   }
 
   uploadingOn = async () => {

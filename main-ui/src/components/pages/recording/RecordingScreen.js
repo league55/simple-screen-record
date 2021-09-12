@@ -115,9 +115,9 @@ class RecordingScreen extends React.Component {
     return (
       <Container>
         <Segment>
-          <Grid divided='vertically'>
-            <Grid.Row columns={2}>
-              <Grid.Column width={9}>
+          <Grid divided='vertically' stretched={true}>
+            <Grid.Row columns={1}>
+              <Grid.Column width={UI_ONLY ? 0 : 9}>
                 <VideoPanel videoSourceProps={{mediaStream, record: currentRecord, recordUrl: currentRecordUrl}} placeholder={videoPlaceHolder}/>
                 <Segment>
                   <Form>
@@ -132,7 +132,7 @@ class RecordingScreen extends React.Component {
                   </Form>
                 </Segment>
               </Grid.Column>
-              {<Grid.Column width={5}>
+              {!UI_ONLY && <Grid.Column width={5}>
                 <FileList files={files} play={this.onHitPlay}/>
               </Grid.Column>}
             </Grid.Row>
