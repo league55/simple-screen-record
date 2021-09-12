@@ -2,7 +2,7 @@
   "name": "screen-record-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://league55.github.io/RTC-screen-record/",
+  "homepage": "https://league55.github.io/simple-screen-record/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

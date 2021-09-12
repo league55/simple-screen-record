@@ -1,3 +1,4 @@
+#Simple Screen Recorder
 ## About
 A training project, key goals:
 * Research AWS services
@@ -5,7 +6,7 @@ A training project, key goals:
 * Create a Web-Server application that uses those two
 * deploy application
   
-Currently, deployed on [GitHub Pages](https://league55.github.io/RTC-screen-record/) without back-end.
+Currently, deployed on [GitHub Pages](https://league55.github.io/simple-screen-record/) without back-end.
 
 ## Functionality that I was aiming to reach:
 ![alt functionality](files/functionality.png)

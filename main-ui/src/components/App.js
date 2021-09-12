@@ -28,6 +28,7 @@ class App extends React.Component {
     return (
       <Container>
         <GithubCorner href="https://github.com/league55/RTC-screen-record" bannerColor="#70B7FD"/>
+        <h1>Simple Screen Recorder</h1>
         {isLoggedIn || UI_ONLY ? <RecordingScreen/> : <LoginScreen onLoginUpdate={this.onLoginUpdate}/>}
       </Container>
     );
