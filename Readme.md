@@ -1,16 +1,28 @@
 ## About
-![alt demo](files/demo.gif)
-
-Currently, deployed on [GitHub Pages](https://league55.github.io/RTC-screen-record/) without back-end. 
-
 A training project, key goals:
 * Research AWS services
 * Research WebRTC
-* Create a Web-Server application that uses those
+* Create a Web-Server application that uses those two
 * deploy application
+  
+Currently, deployed on [GitHub Pages](https://league55.github.io/RTC-screen-record/) without back-end.
 
 ## Functionality that I was aiming to reach:
 ![alt functionality](files/functionality.png)
+
+## Demo
+![alt demo](files/demo.gif)
+
+## Current state:
+### TLDR
+Only [UI part of application](https://league55.github.io/RTC-screen-record/) is operating: allows recording screen, playing and downloading records in the `webm` format.
+
+
+### Backend services state
+After receiving first bills from AWS for using Elastic IP address I shut down most of what was running on AWS,
+and adjusted UI code - added feature switcher so that UI could run it's core feature - screen record, without possibility to upload files to cloud.    
+Currently, it is hosted on `GitHub` Pages and deployed from `GitHub Actions` pipeline.
+
 
 ### Tech:
 Using technologies that I am already familiar with:
@@ -40,8 +52,3 @@ And partially new ones:
 ## Deployment
 At one point I deployed and tested whole thing on an AWS EC2 instance, architecture was next: 
 ![alt architecture](files/architecture.png)
-
- ## Current state:
-After receiving first bills from AWS for using Elastic IP address I shut down most of what was running on AWS, 
-and modified UI code - added feature switcher so that UI could run it's core feature - screen record, without possibility to upload files to cloud.    
-Currently, it is hosted on `GitHub` Pages and deployed from `GitHub Actions` pipeline.
