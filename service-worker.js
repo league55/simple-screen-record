@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/RTC-screen-record/precache-manifest.6171a8ab262dc48477b1fb6d7d89e2e2.js"
+  "/RTC-screen-record/precache-manifest.5e904382f708d5637718ca95a94edc3e.js"
 );
 
 self.addEventListener('message', (event) => {
